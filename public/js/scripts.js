@@ -45,8 +45,8 @@ var Gallery = exports.Gallery = function () {
     this.template(container);
     this.setImages(data);
     this.setDots(data);
-    this.navigateGallery(container, this.i, data);
-    this.navigateDots(this.i, data);
+    this.navigateGallery(container, data);
+    this.navigateDots(data);
   }
 
   _createClass(Gallery, [{

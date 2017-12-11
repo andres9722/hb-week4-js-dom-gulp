@@ -82,6 +82,7 @@ li{
   background:#fff;
   border-radius:50%;
   opacity:.8;
+  border:1px solid #000;
 }
 
 @media screen and (min-width:1024px){

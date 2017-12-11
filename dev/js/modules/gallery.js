@@ -126,7 +126,7 @@ export class Gallery {
         prev.classList.add('disabled')
       }
 
-      if (this.i === data.length - 1) {
+      if (this.i === image.length - 1) {
         next.classList.add('disabled')
       }
     })

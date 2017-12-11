@@ -16,7 +16,6 @@ var _moviesList2 = _interopRequireDefault(_moviesList);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 new _gallery.Gallery(document.querySelector('.gallery-container'), _galleryImages2.default);
-
 new _movies.Movies(document.querySelector('.movies-container'), _moviesList2.default);
 
 },{"./modules/gallery":3,"./modules/gallery-images":2,"./modules/movies":5,"./modules/movies-list":4}],2:[function(require,module,exports){
@@ -170,7 +169,7 @@ var Gallery = exports.Gallery = function () {
           prev.classList.add('disabled');
         }
 
-        if (_this2.i === data.length - 1) {
+        if (_this2.i === image.length - 1) {
           next.classList.add('disabled');
         }
       });

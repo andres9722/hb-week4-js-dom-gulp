@@ -1,0 +1,21 @@
+.main {
+  display: flex;
+  flex-wrap: wrap;
+
+  &-title {
+    text-align: center;
+    width: 100%;
+    color: $principal-color;
+  }
+
+  &-link {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: $black;
+  }
+}
+
+
+
+

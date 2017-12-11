@@ -1,0 +1,91 @@
+.main-header {
+  background: $principal-color;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 .5em;
+  margin-bottom: 2em;
+
+  &__title {
+    text-transform: uppercase;
+  }
+
+  &__link {
+    color: $white;
+    margin-left: 1em;
+  }
+}
+
+.movies-container {
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .movies-item {
+      width: 90%;
+      margin-bottom: 2em;
+      text-align: center;
+      padding: 0.5em .3em;
+      border: .1px solid $border-color;
+      box-shadow: 0 2px 2px $border-color;
+      position: relative;
+      overflow: hidden;
+
+      &__info {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        bottom: -100%;
+        background: rgba(black, .9);
+        transition: bottom .3s ease;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &:hover {
+        .movies-item__info {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          left: 0;
+          bottom: 0;
+        }
+      }
+
+      &__title {
+        color: $secondary-color;
+      }
+
+      &__director {
+
+      }
+
+      &__year {
+
+      }
+
+      &__image {
+        margin: .5em auto;
+        width: 130px;
+        height: 160px;
+      }
+
+      &__stars {
+        font-size: 0.9em;
+      }
+
+      &__category {
+        
+      }
+
+    }
+  }
+}

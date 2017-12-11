@@ -16,7 +16,7 @@ var _moviesList2 = _interopRequireDefault(_moviesList);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 new _gallery.Gallery(document.querySelector('.gallery-container'), _galleryImages2.default);
-new _movies.Movies(document.querySelector('.movies-container'), _moviesList2.default);
+//new Movies(document.querySelector('.movies-container'), dataMovies)
 
 },{"./modules/gallery":3,"./modules/gallery-images":2,"./modules/movies":5,"./modules/movies-list":4}],2:[function(require,module,exports){
 'use strict';
@@ -52,7 +52,7 @@ var Gallery = exports.Gallery = function () {
   _createClass(Gallery, [{
     key: 'template',
     value: function template(container) {
-      var galleryContainer = '\n      <nav class="gallery-navigation">\n        <a href="" class="gallery-navigation__button prev"></a>\n        <a href="" class="gallery-navigation__button next"></a>\n      </nav>\n      <ul class="gallery-container__images"></ul>\n      <ul class="gallery-container__dots"></ul>\n    ';
+      var galleryContainer = '\n      <nav class="gallery-container__navigation">\n        <a href="" class="gallery-navigation__button prev"></a>\n        <a href="" class="gallery-navigation__button next"></a>\n      </nav>\n      <ul class="gallery-container__images"></ul>\n      <ul class="gallery-container__dots"></ul>\n    ';
       container.innerHTML = galleryContainer;
     }
   }, {
@@ -67,43 +67,6 @@ var Gallery = exports.Gallery = function () {
       });
     }
   }, {
-    key: 'changeIndex',
-    value: function changeIndex(i) {
-      var image = document.querySelectorAll('.gallery-figure');
-      var dots = document.querySelectorAll('.gallery-dot');
-      var prev = document.querySelector('.prev');
-      var next = document.querySelector('.next');
-
-      if (i >= 0 && i < image.length && i !== this.i) {
-        image[this.i].classList.remove('show');
-        dots[this.i].classList.remove('selected');
-        this.i = i;
-        image[this.i].classList.add('show');
-        dots[this.i].classList.add('selected');
-        dots[this.i].focus();
-
-        console.log(this.i);
-
-        if (this.i !== 0) {
-          prev.classList.remove('disabled');
-        }
-
-        if (this.i !== image.length - 1) {
-          next.classList.remove('disabled');
-        }
-      }
-    }
-  }, {
-    key: 'goNext',
-    value: function goNext() {
-      this.changeIndex(this.i + 1);
-    }
-  }, {
-    key: 'goPrev',
-    value: function goPrev() {
-      this.changeIndex(this.i - 1);
-    }
-  }, {
     key: 'setDots',
     value: function setDots(data) {
       data.forEach(function (img) {
@@ -115,35 +78,19 @@ var Gallery = exports.Gallery = function () {
       });
     }
   }, {
-    key: 'navigateDots',
-    value: function navigateDots(data) {
-      var _this = this;
-
-      var dotsContainer = document.querySelector('.gallery-container__dots');
-      var dots = document.querySelectorAll('.gallery-dot');
-
-      dotsContainer.addEventListener('click', function (e) {
-        var target = e.target;
-        if (target.tagName === 'LI') {
-          var i = Array.from(dots).indexOf(target);
-          _this.changeIndex(i);
-        }
-      });
-    }
-  }, {
     key: 'navigateGallery',
-    value: function navigateGallery(container, i, data) {
-      var _this2 = this;
+    value: function navigateGallery(container, data) {
+      var _this = this;
 
       var prev = document.querySelector('.prev');
       var next = document.querySelector('.next');
       var image = document.querySelectorAll('.gallery-figure');
       var dots = document.querySelectorAll('.gallery-dot');
 
-      if (i === 0) {
+      if (this.i === 0) {
         prev.classList.add('disabled');
         image[this.i].classList.add('show');
-        dots[i].classList.add('selected');
+        dots[this.i].classList.add('selected');
       }
 
       container.addEventListener('keyup', function (e) {
@@ -158,21 +105,54 @@ var Gallery = exports.Gallery = function () {
         var target = e.target;
 
         if (target === prev) {
-          next.classList.remove('disabled');
-          _this2.goPrev();
+          _this.goPrev();
         } else if (target === next) {
-          prev.classList.remove('disabled');
-          _this2.goNext();
+          _this.goNext();
         }
 
-        if (_this2.i === 0) {
-          prev.classList.add('disabled');
-        }
+        _this.i === 0 ? prev.classList.add('disabled') : prev.classList.remove('disabled');
+        _this.i === image.length - 1 ? next.classList.add('disabled') : next.classList.remove('disabled');
+      });
+    }
+  }, {
+    key: 'navigateDots',
+    value: function navigateDots(data) {
+      var _this2 = this;
 
-        if (_this2.i === image.length - 1) {
-          next.classList.add('disabled');
+      var dotsContainer = document.querySelector('.gallery-container__dots');
+      var dots = document.querySelectorAll('.gallery-dot');
+
+      dotsContainer.addEventListener('click', function (e) {
+        var target = e.target;
+        if (target.tagName === 'LI') {
+          var i = Array.from(dots).indexOf(target);
+          _this2.changeIndex(i);
         }
       });
+    }
+  }, {
+    key: 'changeIndex',
+    value: function changeIndex(i) {
+      var image = document.querySelectorAll('.gallery-figure');
+      var dots = document.querySelectorAll('.gallery-dot');
+
+      if (i >= 0 && i < image.length && i !== this.i) {
+        image[this.i].classList.remove('show');
+        dots[this.i].classList.remove('selected');
+        this.i = i;
+        image[this.i].classList.add('show');
+        dots[this.i].classList.add('selected');
+      }
+    }
+  }, {
+    key: 'goNext',
+    value: function goNext() {
+      this.changeIndex(this.i + 1);
+    }
+  }, {
+    key: 'goPrev',
+    value: function goPrev() {
+      this.changeIndex(this.i - 1);
     }
   }]);
 

@@ -1,11 +1,13 @@
 {
-  "name": "Boilerplate",
+  "name": "hb-week4-js-dom",
   "version": "1.0.0",
-  "description": "Simple scafolding for statics web projects",
+  "description": "",
   "main": "gulpfile.babel.js",
   "scripts": {
     "build": "gulp pug styles scripts",
-    "start": "gulp"
+    "start": "gulp",
+    "lint": "stylelint --config .stylelintrc --syntax scss",
+    "precommit": "npm run lint"
   },
   "author": "Andres Felipe",
   "license": "GPL-2.0",
@@ -25,6 +27,9 @@
     "gulp-sourcemaps": "^2.6.1",
     "gulp-watch": "^4.3.11",
     "standard": "^10.0.3",
+    "stylelint": "^8.3.1",
+    "stylelint-config-recommended-scss": "^3.0.0",
+    "stylelint-scss": "^2.2.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },

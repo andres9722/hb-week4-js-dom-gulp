@@ -21,13 +21,10 @@ h1,h2,h3,h4,h5,h6{
   margin:0;
 }
 
-p{
-  margin:0;
-}
-
 img{
   max-width:100%;
   width:100%;
+  height:100%;
   display:block;
 }
 
@@ -36,19 +33,15 @@ ul{
   padding:0;
 }
 
-li,ul{
+li{
   list-style:none;
 }
 
 .gallery{
   position:relative;
-  width:100%;
 }
 
 .gallery-figure{
-  text-align:center;
-  border-radius:5px;
-  width:100%;
   height:100vh;
   margin:0;
   display:none;
@@ -79,25 +72,8 @@ li,ul{
 }
 
 .gallery-image{
-  height:100%;
   -o-object-fit:cover;
      object-fit:cover;
-}
-
-.gallery-container__dots{
-  position:absolute;
-  z-index:2;
-  bottom:1em;
-  left:0;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -ms-flex-pack:distribute;
-      justify-content:space-around;
-  -webkit-box-align:center;
-      -ms-flex-align:center;
-          align-items:center;
-  width:100%;
 }
 
 .gallery-dot{
@@ -108,6 +84,13 @@ li,ul{
   opacity:.8;
 }
 
+@media screen and (min-width:1024px){
+  .gallery-dot{
+    width:18px;
+    height:18px;
+  }
+}
+
 .gallery-dot.selected{
   background:#1190c5;
   width:20px;
@@ -115,6 +98,13 @@ li,ul{
   opacity:1;
   -webkit-animation:b .5s linear;
           animation:b .5s linear;
+}
+
+@media screen and (min-width:1024px){
+  .gallery-dot.selected{
+    width:25px;
+    height:25px;
+  }
 }
 
 @-webkit-keyframes b{
@@ -135,27 +125,48 @@ li,ul{
   }
 }
 
-.gallery-container{
-  max-width:100vh;
+.gallery-container,.gallery-container__images{
   width:100%;
   overflow-y:hidden;
 }
 
 .gallery-container__images{
-  overflow-y:hidden;
   height:100vh;
-  width:100%;
+}
+
+.gallery-container__dots{
+  position:absolute;
+  z-index:1;
+  bottom:1em;
+  left:50%;
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  -ms-flex-pack:distribute;
+      justify-content:space-around;
+  -webkit-box-align:center;
+      -ms-flex-align:center;
+          align-items:center;
+  width:70%;
+  -webkit-transform:translate(-50%);
+          transform:translate(-50%);
+}
+
+@media screen and (min-width:1024px){
+  .gallery-container__dots{
+    width:30%;
+  }
 }
 
 .next{
   position:absolute;
   top:45%;
-  right:0;
+  right:1%;
   opacity:1;
 }
 
 .next.disabled{
-  opacity:.5;
+  opacity:.2;
 }
 
 .next:after{
@@ -165,7 +176,7 @@ li,ul{
   width:35px;
   height:35px;
   z-index:1;
-  background:rgba(0,0,0,.4);
+  background:#fff;
   border-radius:50%;
 }
 
@@ -175,11 +186,11 @@ li,ul{
 
 .prev{
   top:45%;
-  left:0;
+  left:1%;
 }
 
 .prev.disabled{
-  opacity:.5;
+  opacity:.2;
 }
 
 .prev:after{
@@ -190,7 +201,7 @@ li,ul{
   width:35px;
   height:35px;
   z-index:1;
-  background:rgba(0,0,0,.4);
+  background:#fff;
   border-radius:50%;
 }
 

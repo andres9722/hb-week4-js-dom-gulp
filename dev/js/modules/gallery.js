@@ -10,7 +10,7 @@ export class Gallery {
 
   template (container) {
     let galleryContainer = `
-      <nav class="gallery-navigation">
+      <nav class="gallery-container__navigation">
         <a href="" class="gallery-navigation__button prev"></a>
         <a href="" class="gallery-navigation__button next"></a>
       </nav>
@@ -32,40 +32,6 @@ export class Gallery {
     })
   }
 
-  changeIndex (i) {
-    let image = document.querySelectorAll('.gallery-figure')
-    let dots = document.querySelectorAll('.gallery-dot')
-    let prev = document.querySelector('.prev')
-    let next = document.querySelector('.next')
-
-    if (i >= 0 && i < image.length && i !== this.i) {
-      image[this.i].classList.remove('show')
-      dots[this.i].classList.remove('selected')
-      this.i = i
-      image[this.i].classList.add('show')
-      dots[this.i].classList.add('selected')
-      dots[this.i].focus()
-
-      console.log(this.i)
-
-      if (this.i !== 0) {
-        prev.classList.remove('disabled')
-      }
-
-      if (this.i !== image.length - 1) {
-        next.classList.remove('disabled')
-      }
-    }
-  }
-
-  goNext () {
-    this.changeIndex(this.i + 1)
-  }
-
-  goPrev () {
-    this.changeIndex(this.i - 1)
-  }
-
   setDots (data) {
     data.forEach(img => {
       let dots = document.createElement('li')
@@ -75,6 +41,40 @@ export class Gallery {
       dots.classList.add('gallery-dot')
       dots.innerHTML = dotsContent
       document.querySelector('.gallery-container__dots').appendChild(dots)
+    })
+  }
+
+  navigateGallery (container, data) {
+    let prev = document.querySelector('.prev')
+    let next = document.querySelector('.next')
+    let image = document.querySelectorAll('.gallery-figure')
+    let dots = document.querySelectorAll('.gallery-dot')
+
+    if (this.i === 0) {
+      prev.classList.add('disabled')
+      image[this.i].classList.add('show')
+      dots[this.i].classList.add('selected')
+    }
+
+    container.addEventListener('keyup', e => {
+      if (e.key === 'ArrowRight') next.click()
+      if (e.key === 'ArrowUp') next.click()
+      if (e.key === 'ArrowLeft') prev.click()
+      if (e.key === 'ArrowDown') prev.click()
+    })
+
+    container.addEventListener('click', e => {
+      e.preventDefault()
+      let target = e.target
+
+      if (target === prev) {
+        this.goPrev()
+      } else if (target === next) {
+        this.goNext()
+      }
+
+      (this.i === 0) ? prev.classList.add('disabled') : prev.classList.remove('disabled');
+      (this.i === image.length - 1) ? next.classList.add('disabled') : next.classList.remove('disabled')
     })
   }
 
@@ -91,44 +91,24 @@ export class Gallery {
     })
   }
 
-  navigateGallery (container, i, data) {
-    let prev = document.querySelector('.prev')
-    let next = document.querySelector('.next')
+  changeIndex (i) {
     let image = document.querySelectorAll('.gallery-figure')
     let dots = document.querySelectorAll('.gallery-dot')
 
-    if (i === 0) {
-      prev.classList.add('disabled')
+    if (i >= 0 && i < image.length && i !== this.i) {
+      image[this.i].classList.remove('show')
+      dots[this.i].classList.remove('selected')
+      this.i = i
       image[this.i].classList.add('show')
-      dots[i].classList.add('selected')
+      dots[this.i].classList.add('selected')
     }
+  }
 
-    container.addEventListener('keyup', e => {
-      if (e.key === 'ArrowRight') next.click()
-      if (e.key === 'ArrowUp') next.click()
-      if (e.key === 'ArrowLeft') prev.click()
-      if (e.key === 'ArrowDown') prev.click()
-    })
+  goNext () {
+    this.changeIndex(this.i + 1)
+  }
 
-    container.addEventListener('click', e => {
-      e.preventDefault()
-      let target = e.target
-
-      if (target === prev) {
-        next.classList.remove('disabled')
-        this.goPrev()
-      } else if (target === next) {
-        prev.classList.remove('disabled')
-        this.goNext()
-      }
-
-      if (this.i === 0) {
-        prev.classList.add('disabled')
-      }
-
-      if (this.i === image.length - 1) {
-        next.classList.add('disabled')
-      }
-    })
+  goPrev () {
+    this.changeIndex(this.i - 1)
   }
 }

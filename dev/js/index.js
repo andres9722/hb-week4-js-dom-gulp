@@ -5,4 +5,4 @@ import dataGallery from './modules/gallery-images'
 import dataMovies from './modules/movies-list'
 
 new Gallery(document.querySelector('.gallery-container'), dataGallery)
-new Movies(document.querySelector('.movies-container'), dataMovies)
+//new Movies(document.querySelector('.movies-container'), dataMovies)
